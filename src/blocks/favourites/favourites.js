@@ -1,10 +1,21 @@
 import React from 'react';
 import PostItem from '../post-item/post-item';
 
-const Favourites = () => {
+const Favourites = ({posts, onStarClick}) => {
+    const allPosts = posts.filter(item => item.liked === true).map(item => {
+        const {id, ...itemProps} = item;
+        return (
+            <li key={id}>
+                <PostItem 
+                {...itemProps}
+                onStarClick={() => onStarClick(id)}/>
+            </li>
+        )
+    });
+
     return (
-        <ul className="favourites-list">
-            <PostItem/>
+        <ul className="posts-list">
+            {allPosts}
         </ul>
     )
 

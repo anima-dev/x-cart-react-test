@@ -26,6 +26,12 @@
     border: none;
     padding: 0;
     background-color: transparent;
+    color: #DADBDC;
+    outline: none;
+}
+
+.post__star_liked {
+    color: #5C9EAD;
 }
 
 .post__text {
@@ -34,6 +40,6 @@
     font-size: 14px;
     line-height: 26px;
     color: #326273;
-    margin-top: 17px;
+    margin-top: 10px;
 }
 
