@@ -3,9 +3,7 @@ import './post-item.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-    const PostItem = ({title, body, liked, onStarClick}) => {
-
-    
+const PostItem = ({title, body, liked, onStarClick}) => {
     let postStarClasses = "post__star";
 
     if (liked) {
@@ -13,7 +11,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
     }
 
     let postTitle = title.length >= 21 ? title.slice(0, 21) + "..." : title;
-    let postBody = body.length >= 120 ? body.slice(0, 120) + "..." : body;
+    let postBody = body.length >= 121 ? body.slice(0, 121) + "..." : body;
 
     return (
         <div className="post__item">

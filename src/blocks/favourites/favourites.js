@@ -18,7 +18,6 @@ const Favourites = ({posts, onStarClick}) => {
             {allPosts}
         </ul>
     )
-
 }
 
 export default Favourites;

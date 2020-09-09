@@ -10,7 +10,9 @@ export default class App extends Component {
         this.state = {
             data: []
         }
+        this.maxId = 0;
         this.onStarClick = this.onStarClick.bind(this);
+        this.onAddPost = this.onAddPost.bind(this);
     }
 
     componentDidMount() {
@@ -29,19 +31,31 @@ export default class App extends Component {
                     liked: false
                 })
             });
+
             this.setState(({data}) => {
                 return {
                     data: posts
                 }
             });
+
+            this.getMaxId();
         })
+    }
+
+    getMaxId() {
+        const idArr = [];
+        this.state.data.forEach(item => {
+            idArr.push(+item.id);
+        })
+        const maxid = Math.max(...idArr);
+        this.maxId = maxid;
     }
 
     onStarClick(id) {
         this.setState(({data}) => {
             const postIndex = data.findIndex((post) => post.id === id);
-            const toggledPost = Object.assign({}, data[postIndex], { liked: !data[postIndex].liked});
-            const newArr = [...data.slice(0, postIndex), toggledPost, ...data.slice(postIndex + 1)];
+            const updatedPost = {...data[postIndex], liked: !data[postIndex].liked};
+            const newArr = [...data.slice(0, postIndex), updatedPost, ...data.slice(postIndex + 1)];
             
             return {
                 data: newArr
@@ -50,34 +64,49 @@ export default class App extends Component {
         });
     }
 
-
-
-    
-    
+    onAddPost(title, body) {
+        const newPost = {
+            id: ++this.maxId,
+            title,
+            body,
+            liked: false
+        }
+        this.setState(({data}) => {
+            const newArr = [newPost, ...data];
+            return {
+                data: newArr
+            }
+        });
+    }
 
     render() {
+        const posts = this.state.data;
+        const all = posts.length;
+        const liked = posts.filter((post) => post.liked).length;
+
         return (
             <div className="main">
                 <div className="container">
                     <div className="wrapper">
                         <div className="column column_left">
                             <div className="all">
-                                <h2 className="title">All</h2>
+                                <h2 className="title">All ({all})</h2>
                                 <PostsList 
-                                posts={this.state.data}
+                                posts={posts}
                                 onStarClick={this.onStarClick}/>
                             </div>
                         </div>
                         <div className="column column_right">
                             <div className="post-new">
                                 <h2 className="title">Add New</h2>
-                                <PostAddForm />
+                                <PostAddForm
+                                onAdd={this.onAddPost} />
                             </div>
                             <div className="favourites">
-                                <h2 className="title">Favourites</h2>
+                                <h2 className="title">Favourites ({liked})</h2>
                                 <Favourites 
                                 onStarClick={this.onStarClick} 
-                                posts={this.state.data}/>
+                                posts={posts}/>
                             </div>
                         </div>
                     </div>
