@@ -15,9 +15,13 @@ const PostsList = ({posts, onStarClick}) => {
     });
 
     return (
-        <ul className="posts-list">
-            {allPosts}
-        </ul>
+        <div className="all">
+            <h2 className="title">All ({posts.length})</h2>
+            <ul className="posts-list">
+                {allPosts}
+            </ul>
+        </div>
+        
     )
 
 }

@@ -14,9 +14,13 @@ const Favourites = ({posts, onStarClick}) => {
     });
 
     return (
-        <ul className="posts-list">
-            {allPosts}
-        </ul>
+        <div className="favourites">
+            <h2 className="title">Favourites ({posts.filter((post) => post.liked).length})</h2>
+                <ul className="posts-list">
+                    {allPosts}
+                </ul>
+        </div>
+        
     )
 }
 

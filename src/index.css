@@ -15,4 +15,12 @@ code {
     monospace;
 }
 
+.title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #FFFFFF;
+  width: 455px;
+}
+
 

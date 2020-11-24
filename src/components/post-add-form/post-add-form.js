@@ -48,7 +48,9 @@ export default class PostAddForm extends Component {
 
     render() {
         return (
-            <form 
+            <div className="post-new">
+                <h2 className="title">Add New</h2>
+                <form 
             className="form__form"
             onSubmit={this.onFormSubmit}>
                 <label className="form__label">
@@ -79,6 +81,8 @@ export default class PostAddForm extends Component {
                     submit
                 </button>
             </form>
+            </div>
+            
         )
     }
 }
