@@ -1,27 +1,19 @@
 import React from 'react';
-import PostItem from '../post-item/post-item';
+import PostsList from '../posts-list';
+import './favourites.css';
 
-const Favourites = ({posts, onStarClick}) => {
-    const allPosts = posts.filter(item => item.liked === true).map(item => {
-        const {id, ...itemProps} = item;
-        return (
-            <li key={id}>
-                <PostItem 
-                {...itemProps}
-                onStarClick={() => onStarClick(id)}/>
-            </li>
-        )
-    });
 
+const Favourites = ({num}) => {
     return (
         <div className="favourites">
-            <h2 className="title">Favourites ({posts.filter((post) => post.liked).length})</h2>
-                <ul className="posts-list">
-                    {allPosts}
+                <h2 className="title">Favourite ({num})</h2>
+                <ul className="favourites-list">
+                    <PostsList>
+                        {(posts) => (posts.filter(item => item.liked === true))}
+                    </PostsList>
                 </ul>
-        </div>
-        
-    )
-}
+            </div>
+    );
+};
 
 export default Favourites;

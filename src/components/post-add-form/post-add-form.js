@@ -1,50 +1,47 @@
 import React, {Component} from 'react';
 import './post-add-form.css';
+import {connect} from 'react-redux';
+import {onPostAdd} from '../../actions';
 
-export default class PostAddForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+class PostAddForm extends Component {
+        state = {
             title: '',
             text: ''
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-    }
+        };
 
-    onInput(e) {
+    onInput = (e) => {
         const maxChar = e.target.name === "title" ? 20 : 120;
         if (e.target.value.length > maxChar) {
             e.target.value = e.target.value.slice(0, maxChar);
         }
-    }
+    };
 
-    handleChange(e) {
+    handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
 
         this.setState({
             [name]: value
         });
-    }
+    };
 
-    onFormSubmit(e) {
+    onFormSubmit = (e) => {
         e.preventDefault();
         const title = this.state.title;
-        const text = this.state.text;
+        const body = this.state.text;
 
-        if (title === '' || text === '') {
+        if (title === '' || body === '') {
             alert('Please fill in both fields');
             return;
         }
 
-        this.props.onAdd(title, text);
+        this.props.onPostAdd({title, body});
 
         this.setState({
             title: '',
             text: '' 
-        })
-    }
+        });
+    };
 
     render() {
         return (
@@ -82,7 +79,12 @@ export default class PostAddForm extends Component {
                 </button>
             </form>
             </div>
-            
-        )
-    }
-}
+        );
+    };
+};
+
+const mapDispatchToProps = {
+    onPostAdd
+};
+
+export default connect(null, mapDispatchToProps)(PostAddForm);

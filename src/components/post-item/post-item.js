@@ -3,7 +3,7 @@ import './post-item.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-const PostItem = ({title, body, liked, onStarClick}) => {
+const PostItem = ({title, body, liked, postLiked}) => {
     let postStarClasses = "post__star";
 
     if (liked) {
@@ -20,7 +20,7 @@ const PostItem = ({title, body, liked, onStarClick}) => {
                 <button 
                     type="button" 
                     className={postStarClasses}
-                    onClick={onStarClick}>
+                    onClick={postLiked}>
                     <FontAwesomeIcon icon={faStar} />
                 </button>
             </div>
